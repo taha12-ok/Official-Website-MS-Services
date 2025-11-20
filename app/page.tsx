@@ -184,11 +184,9 @@ export default function HomePage() {
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{
-                      delay: wordIndex * 0.1 + letterIndex * 0.03,
-                      type: "spring",
-                      stiffness: 150,
-                      damping: 25,
-                    }}
+  delay: wordIndex * 0.1 + letterIndex * 0.03,
+  duration: 0.5
+}}
                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80"
                   >
                     {letter}
