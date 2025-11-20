@@ -213,27 +213,26 @@ export default function ContactPage() {
   };
 
   // FIXED: Simplified variants without custom easing
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
     }
-  };
+  }
+};
 
-  // FIXED: Remove custom easing entirely to avoid TypeScript errors
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8
-      }
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8
     }
-  };
+  }
+};
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-neutral-950">
@@ -625,3 +624,4 @@ export default function ContactPage() {
     </div>
   );
 }
+
