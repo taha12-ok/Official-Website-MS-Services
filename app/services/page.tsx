@@ -379,27 +379,26 @@ function FloatingPaths({ position }: { position: number }) {
 export default function ServicesPage() {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
+ const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
     }
-  };
+  }
+};
 
-  // FIXED: Remove custom easing to avoid TypeScript errors
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8
-      }
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8
     }
-  };
+  }
+};
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-neutral-950">
@@ -710,3 +709,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+
