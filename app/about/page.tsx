@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Target, Eye, Award, Users, Shield, CheckCircle, TrendingUp, Zap, Building2, Rocket, Heart, Star, Globe, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -133,7 +133,7 @@ export default function AboutPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
+          transition={{ duration: 1 }}
           className="max-w-6xl mx-auto text-center"
         >
           {/* Badge */}
@@ -163,9 +163,7 @@ export default function AboutPage() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{
                       delay: wordIndex * 0.1 + letterIndex * 0.03,
-                      type: "spring",
-                      stiffness: 150,
-                      damping: 25,
+                      duration: 0.5
                     }}
                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80"
                   >
@@ -179,7 +177,7 @@ export default function AboutPage() {
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
             className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0"
           >
             Since 2005, we've been delivering integrated infrastructure solutions that transform institutions and empower communities through innovation and excellence
@@ -196,9 +194,9 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105"
+              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
             >
-              <Eye className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-neutral-700 dark:text-neutral-300 mb-4 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 transition-all duration-500" />
+              <Eye className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-neutral-700 dark:text-neutral-300 mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-500" />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Our Vision
               </h2>
@@ -226,9 +224,9 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105"
+              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
             >
-              <Target className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-neutral-700 dark:text-neutral-300 mb-4 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 transition-all duration-500" />
+              <Target className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-neutral-700 dark:text-neutral-300 mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-500" />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Our Mission
               </h2>
@@ -292,13 +290,13 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: idx * 0.1 }}
-                  className={`group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105 ${
+                  className={`group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border transition-all duration-500 hover:scale-[1.02] ${
                     isActive 
-                      ? 'border-neutral-400 dark:border-neutral-600 bg-white/10 dark:bg-black/20 scale-[1.02] sm:scale-105' 
+                      ? 'border-neutral-400 dark:border-neutral-600 bg-white/10 dark:bg-black/20 scale-[1.02]' 
                       : 'border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600'
                   }`}
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br from-neutral-600 to-neutral-800 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br from-neutral-600 to-neutral-800 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <Icon size={20} className="sm:w-6 sm:h-6 md:w-8 md:h-8 text-white" />
                   </div>
                   <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-neutral-900 dark:text-white">{value.title}</h3>
@@ -333,7 +331,7 @@ export default function AboutPage() {
           </div>
 
           <div className="relative">
-            {/* Timeline Line - Hidden on mobile, visible on desktop */}
+            {/* Timeline Line */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-neutral-600 via-neutral-700 to-neutral-600" />
 
             <div className="space-y-8 sm:space-y-12 md:space-y-24">
@@ -352,7 +350,7 @@ export default function AboutPage() {
                   >
                     {/* Content */}
                     <div className={`flex-1 ${isLeft ? 'md:text-right' : 'md:text-left'} text-center md:text-left`}>
-                      <div className={`inline-block p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] md:hover:scale-105 ${
+                      <div className={`inline-block p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] ${
                         isLeft ? 'md:hover:-translate-x-4' : 'md:hover:translate-x-4'
                       }`}>
                         <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-2 sm:mb-4">
@@ -363,12 +361,12 @@ export default function AboutPage() {
                       </div>
                     </div>
 
-                    {/* Timeline Dot - Hidden on mobile */}
+                    {/* Timeline Dot */}
                     <div className="hidden md:block relative">
                       <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br from-neutral-600 to-neutral-800 border-2 sm:border-3 md:border-4 border-white dark:border-neutral-950" />
                     </div>
 
-                    {/* Spacer for desktop layout */}
+                    {/* Spacer */}
                     <div className="hidden md:block flex-1" />
                   </motion.div>
                 );
@@ -412,18 +410,18 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105"
+                className="group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
               >
                 {idx === 0 ? (
                   <div className="w-full h-32 sm:h-40 md:h-48 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-4 sm:mb-6 border border-neutral-300 dark:border-neutral-700">
                     <img 
                       src={member.image} 
                       alt={member.name}
-                      className="w-full h-full object-cover group-hover:scale-105 sm:group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                 ) : (
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br from-neutral-600 to-neutral-800 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br from-neutral-600 to-neutral-800 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <Users size={24} className="sm:w-8 sm:h-8 md:w-10 md:h-10 text-white" />
                   </div>
                 )}
@@ -462,7 +460,7 @@ export default function AboutPage() {
                     transition={{ duration: 0.6, delay: idx * 0.1 }}
                     className="group"
                   >
-                    <Icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto text-neutral-700 dark:text-neutral-300 mb-2 sm:mb-4 group-hover:scale-105 sm:group-hover:scale-110 transition-all duration-500" />
+                    <Icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto text-neutral-700 dark:text-neutral-300 mb-2 sm:mb-4 group-hover:scale-110 transition-all duration-500" />
                     <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-1 sm:mb-2">
                       {stat.value}
                     </div>
