@@ -80,16 +80,22 @@ export default function Navigation() {
           isScrolled ? 'pt-3 sm:pt-4 px-3 sm:px-4' : 'pt-0 px-0'
         }`}
       >
+        {/* NOTE: overflow-hidden REMOVED from this header wrapper on purpose.
+            It was clipping the absolutely-positioned Services dropdown
+            (which sits at top-full and extends below the header box).
+            The rounded-corner / collapse visuals are handled by the
+            inner top-bar and mobile-menu wrappers below, which still
+            have their own overflow-hidden + max-h animation. */}
         <header
-          className={`mx-auto transition-all duration-300 ease-out overflow-hidden ${
+          className={`mx-auto transition-all duration-300 ease-out ${
             isScrolled
               ? 'max-w-5xl rounded-full shadow-2xl border border-neutral-200/50 dark:border-white/10 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-2xl'
               : 'w-full rounded-none border-b border-transparent bg-white/60 dark:bg-neutral-950/60 backdrop-blur-xl'
           }`}
         >
-          {/* Top Bar — fades out once floating */}
+          {/* Top Bar — fades out once floating. overflow-hidden kept here (safe, no dropdown inside) */}
           <div
-            className={`bg-gradient-to-r from-neutral-950 via-neutral-900 to-neutral-950 border-b border-white/10 transition-all duration-300 ease-out overflow-hidden ${
+            className={`bg-gradient-to-r from-neutral-950 via-neutral-900 to-neutral-950 border-b border-white/10 transition-all duration-300 ease-out overflow-hidden rounded-t-full ${
               isScrolled ? 'max-h-0 opacity-0 border-b-0' : 'max-h-20 opacity-100'
             }`}
           >
@@ -190,7 +196,7 @@ export default function Navigation() {
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 10, scale: 0.95 }}
                               transition={{ duration: 0.2 }}
-                              className="absolute top-full left-0 mt-2 w-80 rounded-2xl glass-panel shadow-2xl overflow-hidden"
+                              className="absolute top-full left-0 mt-2 w-80 rounded-2xl glass-panel shadow-2xl overflow-hidden z-50"
                             >
                               <div className="p-2 max-h-96 overflow-y-auto custom-scrollbar">
                                 {item.submenu.map((subitem, subidx) => (
@@ -272,7 +278,7 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu — overflow-hidden kept here too (safe, submenu collapses inline, not absolute) */}
           <AnimatePresence>
             {mobileMenuOpen && (
               <motion.div
