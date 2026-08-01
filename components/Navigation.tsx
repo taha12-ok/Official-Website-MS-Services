@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Phone, Mail, Sun, Moon, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation'; // Add this import
+import { usePathname } from 'next/navigation';
 
 const services = [
   { name: 'Life Raft & Safety Equipment', href: '/services/life-raft' },
@@ -32,7 +32,7 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [darkMode, setDarkMode] = useState(false);
-  
+
   const pathname = usePathname();
 
   useEffect(() => {
@@ -62,13 +62,13 @@ export default function Navigation() {
     return pathname === href;
   };
 
-  const headerContent = (
+  return (
     <>
       {/* Top Bar */}
       <div className="bg-gradient-to-r from-neutral-950 via-neutral-900 to-neutral-950 border-b border-white/10 w-full">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <div className="flex items-center justify-between h-8 sm:h-10 text-[10px] sm:text-xs md:text-sm">
-            <motion.div 
+            <motion.div
               className="flex items-center gap-2 sm:gap-4 text-neutral-400"
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -84,7 +84,7 @@ export default function Navigation() {
                 <span className="hidden md:inline">msservicesandtrading@gmail.com</span>
                 <span className="md:hidden">Email</span>
               </a>
-            </div>
+            </motion.div>
             <div className="flex items-center gap-1 sm:gap-2 text-emerald-400 text-[10px] sm:text-xs">
               <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 animate-pulse" />
               <span className="hidden xs:inline">Building Excellence</span>
@@ -95,13 +95,13 @@ export default function Navigation() {
       </div>
 
       {/* Main Glass Navigation */}
-      <motion.nav 
+      <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3 }}
         className={`fixed top-8 sm:top-10 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled 
-            ? 'bg-white/80 dark:bg-neutral-950/80 backdrop-blur-2xl shadow-2xl border-b border-neutral-200/50 dark:border-white/10' 
+          scrolled
+            ? 'bg-white/80 dark:bg-neutral-950/80 backdrop-blur-2xl shadow-2xl border-b border-neutral-200/50 dark:border-white/10'
             : 'bg-white/60 dark:bg-neutral-950/60 backdrop-blur-xl'
         }`}
       >
@@ -109,24 +109,24 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Animated Logo */}
             <a href="/" className="flex items-center gap-2 sm:gap-3 group">
-              <motion.div 
+              <motion.div
                 className="relative w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
                 whileHover={{ scale: 1.1, rotate: 360 }}
                 transition={{ duration: 0.6 }}
               >
-                <img 
-                  src="/mslogo.png" 
-                  alt="MS Logo" 
+                <img
+                  src="/mslogo.png"
+                  alt="MS Logo"
                   className="w-full h-full object-contain drop-shadow-2xl"
                 />
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur-xl opacity-0 group-hover:opacity-50 transition-opacity"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
               <div>
-                <motion.h1 
+                <motion.h1
                   className="text-xs sm:text-sm md:text-base lg:text-xl font-black bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 dark:from-white dark:via-neutral-200 dark:to-white bg-clip-text text-transparent"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -259,10 +259,9 @@ export default function Navigation() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
+        {/* Mobile Menu */}
+        <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
               id="mobile-menu"
@@ -276,7 +275,7 @@ export default function Navigation() {
                 {navItems.map((item, idx) => {
                   const active = isActive(item.href, !!item.submenu);
                   return (
-                    <motion.div 
+                    <motion.div
                       key={item.name}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -299,7 +298,7 @@ export default function Navigation() {
                             onClick={() => setActiveSubmenu(activeSubmenu === item.name ? null : item.name)}
                             className="p-2 sm:p-3"
                           >
-                            <ChevronDown 
+                            <ChevronDown
                               className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${activeSubmenu === item.name ? 'rotate-180' : ''}`}
                             />
                           </button>
@@ -308,7 +307,7 @@ export default function Navigation() {
                       {item.submenu && (
                         <AnimatePresence>
                           {activeSubmenu === item.name && (
-                            <motion.div 
+                            <motion.div
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
@@ -361,46 +360,6 @@ export default function Navigation() {
       {/* Spacer */}
       <div className="h-24 sm:h-30" />
 
-        <style jsx global>{`
-          .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 3px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #555;
-          }
-          @media (max-width: 640px) {
-            .custom-scrollbar::-webkit-scrollbar {
-              width: 4px;
-            }
-          }
-        `}</style>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <div className={cn(
-        'sticky top-0 z-50 transition-[padding] duration-300 ease-out',
-        isScrolled ? 'py-3' : 'py-0',
-      )}>
-        <header className={cn(
-          'mx-auto flex flex-col items-center transition-all duration-300 ease-out',
-          isScrolled 
-            ? 'max-w-5xl rounded-full bg-white/80 dark:bg-neutral-950/80 shadow-2xl border border-neutral-200/50 dark:border-white/10 supports-[backdrop-filter]:backdrop-blur-2xl' 
-            : 'w-full bg-white/60 dark:bg-neutral-950/60 supports-[backdrop-filter]:backdrop-blur-xl'
-        )}>
-          {headerContent}
-        </header>
-      </div>
-      
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
