@@ -66,7 +66,7 @@ export default function RootLayout({
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         <JsonLd data={[organizationSchema(), localBusinessSchema(), websiteSchema()]} />
-        <Navigation floating />
+        <Navigation  />
         {children}
         <Footer />
         <AIChatbot />
