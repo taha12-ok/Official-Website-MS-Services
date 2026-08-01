@@ -9,6 +9,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '480px',
+      },
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
+      },
       animation: {
         'gradient-flow': 'gradient-flow 3s ease infinite',
         'float': 'float 3s ease-in-out infinite',

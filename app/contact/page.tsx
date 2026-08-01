@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Phone, Mail, MapPin, Send, MessageCircle, Bot, Clock, Building2, ArrowRight, Check, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { CountUp } from '@/components/ui/CountUp';
 
 interface ChatMessage {
   id: string;
@@ -301,6 +302,23 @@ const itemVariants = {
           >
             Ready to transform your operations? Let's discuss how our integrated solutions can drive your success with precision and professionalism
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+          >
+            <a
+              href="https://wa.me/923118305310?text=I%27d%20like%20to%20book%20an%20AI%20Automation%20consultation"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-shimmer inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold text-sm sm:text-base hover:scale-105 transition-transform shadow-lg hover:shadow-xl focus-ring motion-reduce:transition-none motion-reduce:hover:scale-100 group"
+            >
+              <Bot className="w-4 h-4 sm:w-5 sm:h-5" />
+              Book AI Consultation
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 arrow-slide" />
+            </a>
+          </motion.div>
         </motion.div>
       </section>
 
@@ -318,7 +336,7 @@ const itemVariants = {
             <div className="space-y-6 sm:space-y-8">
               <motion.div 
                 variants={itemVariants}
-                className="p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500"
+                className="p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500"
               >
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-4 sm:mb-6 text-neutral-900 dark:text-white">
                   Send Us a Message
@@ -326,54 +344,59 @@ const itemVariants = {
                 
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Full Name *</label>
+                    <label htmlFor="contact-name" className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Full Name *</label>
                     <input
                       type="text"
+                      id="contact-name"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl glass-surface focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
                       placeholder="John Doe"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Email Address *</label>
+                    <label htmlFor="contact-email" className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Email Address *</label>
                     <input
                       type="email"
+                      id="contact-email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl glass-surface focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
                       placeholder="john@example.com"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Phone Number *</label>
+                    <label htmlFor="contact-phone" className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Phone Number *</label>
                     <input
                       type="tel"
+                      id="contact-phone"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl glass-surface focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
                       placeholder="+92 300 1234567"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Service Interested In *</label>
+                    <label htmlFor="contact-service" className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Service Interested In *</label>
                     <select
+                      id="contact-service"
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white text-sm sm:text-base"
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl glass-surface focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all text-neutral-900 dark:text-white text-sm sm:text-base"
                       required
                     >
                       <option value="" className="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white">Select a service</option>
+                      <option value="AI Automation" className="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white">AI Automation</option>
                       <option value="Construction Services" className="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white">Construction Services</option>
                       <option value="IT Equipment & Educational Solutions" className="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white">IT Equipment & Educational Solutions</option>
                       <option value="Janitorial Services" className="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white">Janitorial Services</option>
@@ -385,13 +408,14 @@ const itemVariants = {
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Your Message *</label>
+                    <label htmlFor="contact-message" className="block text-xs sm:text-sm font-semibold mb-2 text-neutral-700 dark:text-neutral-300">Your Message *</label>
                     <textarea
+                      id="contact-message"
                       name="message"
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all resize-none text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl glass-surface focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none transition-all resize-none text-neutral-900 dark:text-white placeholder-neutral-500 text-sm sm:text-base"
                       placeholder="Tell us about your project requirements..."
                       required
                     />
@@ -401,7 +425,7 @@ const itemVariants = {
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group w-full px-4 sm:px-8 py-3 sm:py-4 md:py-5 rounded-lg sm:rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold text-sm sm:text-base md:text-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3"
+                    className="cta-shimmer group w-full px-4 sm:px-8 py-3 sm:py-4 md:py-5 rounded-lg sm:rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold text-sm sm:text-base md:text-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 focus-ring"
                   >
                     {formSubmitted ? (
                       <>
@@ -411,7 +435,7 @@ const itemVariants = {
                     ) : (
                       <>
                         <span>Send via WhatsApp</span>
-                        <ArrowRight size={20} className="sm:w-6 sm:h-6 group-hover:translate-x-1 sm:group-hover:translate-x-2 transition-transform" />
+                        <ArrowRight size={20} className="sm:w-6 sm:h-6 group-hover:translate-x-1 sm:group-hover:translate-x-2 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
                       </>
                     )}
                   </motion.button>
@@ -452,7 +476,7 @@ const itemVariants = {
                       key={idx}
                       href={contact.link}
                       whileHover={{ scale: 1.01 }}
-                      className="group block p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500"
+                      className="group block p-4 sm:p-6 rounded-xl sm:rounded-2xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500"
                     >
                       <div className="flex items-start gap-3 sm:gap-4">
                         <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br ${contact.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500`}>
@@ -471,7 +495,7 @@ const itemVariants = {
               {/* Business Hours */}
               <motion.div 
                 variants={itemVariants}
-                className="p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800"
+                className="p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl glass-surface"
               >
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                   <Clock className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-neutral-700 dark:text-neutral-300" />
@@ -499,7 +523,7 @@ const itemVariants = {
               {/* Quick Stats */}
               <motion.div 
                 variants={itemVariants}
-                className="p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800"
+                className="p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl glass-surface"
               >
                 <h3 className="text-lg sm:text-xl font-black mb-4 sm:mb-6 text-center text-neutral-900 dark:text-white">Why Choose Us?</h3>
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
@@ -512,10 +536,10 @@ const itemVariants = {
                     <motion.div 
                       key={idx}
                       whileHover={{ scale: 1.02 }}
-                      className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800"
+                      className="text-center p-3 sm:p-4 rounded-lg sm:rounded-xl glass-surface"
                     >
                       <div className="text-lg sm:text-xl md:text-2xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-1">
-                        {stat.value}
+                        <CountUp value={stat.value} />
                       </div>
                       <div className="text-xs text-neutral-600 dark:text-neutral-400">{stat.label}</div>
                     </motion.div>
@@ -597,13 +621,15 @@ const itemVariants = {
                 onChange={(e) => setChatMessage(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleChatSubmit()}
                 placeholder="Ask about our services..."
+                aria-label="Ask about our services"
                 className="flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-full bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 focus:border-neutral-400 dark:focus:border-neutral-600 focus:outline-none text-neutral-900 dark:text-white placeholder-neutral-500 text-xs sm:text-sm"
               />
               <motion.button
                 onClick={handleChatSubmit}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r from-neutral-600 to-neutral-800 rounded-full flex items-center justify-center shadow-lg flex-shrink-0"
+                aria-label="Send message"
+                className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r from-neutral-600 to-neutral-800 rounded-full flex items-center justify-center shadow-lg flex-shrink-0 focus-ring"
               >
                 <Send size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
               </motion.button>

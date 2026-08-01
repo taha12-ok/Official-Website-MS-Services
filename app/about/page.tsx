@@ -1,9 +1,11 @@
 "use client"
 import React, { useState } from 'react';
-import { Target, Eye, Award, Users, Shield, CheckCircle, TrendingUp, Zap, Building2, Rocket, Heart, Star, Globe, ArrowRight } from 'lucide-react';
+import { Target, Eye, Award, Users, Shield, CheckCircle, TrendingUp, Zap, Building2, Rocket, Heart, Star, Globe, ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { CountUp } from '@/components/ui/CountUp';
 
 const values = [
   {
@@ -33,7 +35,7 @@ const milestones = [
   { year: "2010", title: "Major Expansion", desc: "Expanded services to include IT solutions and renewable energy" },
   { year: "2015", title: "50+ Projects", desc: "Successfully completed major government and educational projects" },
   { year: "2020", title: "Industry Leader", desc: "Recognized as a trusted partner for multi-disciplinary services" },
-  { year: "2025", title: "Sustainable Future", desc: "Leading the way in green building and solar energy solutions" }
+  { year: "2025", title: "AI & Sustainable Future", desc: "Expanding into Enterprise AI Automation alongside green building and solar energy solutions" }
 ];
 
 const team = [
@@ -180,7 +182,7 @@ export default function AboutPage() {
             transition={{ duration: 1, delay: 0.5 }}
             className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0"
           >
-            Since 2005, we've been delivering integrated infrastructure solutions that transform institutions and empower communities through innovation and excellence
+            Since 2005, we've been delivering integrated infrastructure solutions that transform institutions and empower communities through innovation and excellence — now extending into enterprise AI Automation, intelligent business solutions, AI agents, and workflow automation
           </motion.p>
         </motion.div>
       </section>
@@ -193,8 +195,9 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
+              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
             >
               <Eye className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-neutral-700 dark:text-neutral-300 mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-500" />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
@@ -223,8 +226,9 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
+              className="group p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
             >
               <Target className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-neutral-700 dark:text-neutral-300 mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-500" />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
@@ -252,11 +256,58 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Enterprise AI Specialization */}
+      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-5xl mx-auto"
+        >
+          <div className="p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl glass-surface">
+            <div className="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+              <Sparkles className="w-3.5 h-3.5" />
+              New Capability
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 text-neutral-900 dark:text-white">
+              We Also Specialize in Enterprise AI Automation
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6 sm:mb-8 max-w-3xl">
+              Alongside our established services, M.S Services & Trading Co. now delivers intelligent
+              business solutions that bring automation and AI to your operations.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              {[
+                "Enterprise AI Automation",
+                "Business AI Solutions",
+                "AI Agents",
+                "Workflow Automation",
+                "Intelligent Customer Support",
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-700 dark:text-neutral-300 flex-shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/services/ai-automation"
+              className="mt-6 sm:mt-8 inline-flex items-center gap-2 text-sm sm:text-base font-semibold text-neutral-900 dark:text-white hover:opacity-80 transition-opacity group focus-ring rounded"
+            >
+              Explore AI Automation
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 arrow-slide" />
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
       {/* Core Values */}
       <section className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="max-w-7xl mx-auto"
         >
@@ -264,6 +315,7 @@ export default function AboutPage() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent"
             >
@@ -272,6 +324,7 @@ export default function AboutPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto px-2 sm:px-0"
             >
@@ -289,6 +342,7 @@ export default function AboutPage() {
                   key={idx}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.1 }}
                   className={`group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border transition-all duration-500 hover:scale-[1.02] ${
                     isActive 
@@ -315,6 +369,7 @@ export default function AboutPage() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent"
             >
@@ -323,6 +378,7 @@ export default function AboutPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto px-2 sm:px-0"
             >
@@ -343,6 +399,7 @@ export default function AboutPage() {
                     key={idx}
                     initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: idx * 0.2 }}
                     className={`flex items-center gap-4 sm:gap-6 md:gap-8 ${
                       isLeft ? 'flex-row' : 'flex-row-reverse'
@@ -350,7 +407,7 @@ export default function AboutPage() {
                   >
                     {/* Content */}
                     <div className={`flex-1 ${isLeft ? 'md:text-right' : 'md:text-left'} text-center md:text-left`}>
-                      <div className={`inline-block p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] ${
+                      <div className={`inline-block p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] ${
                         isLeft ? 'md:hover:-translate-x-4' : 'md:hover:translate-x-4'
                       }`}>
                         <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-2 sm:mb-4">
@@ -381,6 +438,7 @@ export default function AboutPage() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="max-w-7xl mx-auto"
         >
@@ -388,6 +446,7 @@ export default function AboutPage() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent"
             >
@@ -396,6 +455,7 @@ export default function AboutPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto px-2 sm:px-0"
             >
@@ -409,15 +469,18 @@ export default function AboutPage() {
                 key={idx}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
+                className="group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02]"
               >
                 {idx === 0 ? (
-                  <div className="w-full h-32 sm:h-40 md:h-48 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-4 sm:mb-6 border border-neutral-300 dark:border-neutral-700">
-                    <img 
-                      src={member.image} 
+                  <div className="relative w-full h-32 sm:h-40 md:h-48 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-4 sm:mb-6 border border-neutral-300 dark:border-neutral-700">
+                    <Image
+                      src={member.image ?? '/ownerpic.png'}
                       alt={member.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                 ) : (
@@ -440,10 +503,11 @@ export default function AboutPage() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="max-w-7xl mx-auto"
         >
-          <div className="p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800">
+          <div className="p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl sm:rounded-2xl md:rounded-3xl glass-surface">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
               {[
                 { icon: Award, value: "21+", label: "Projects Completed" },
@@ -457,12 +521,13 @@ export default function AboutPage() {
                     key={idx}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: idx * 0.1 }}
                     className="group"
                   >
                     <Icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto text-neutral-700 dark:text-neutral-300 mb-2 sm:mb-4 group-hover:scale-110 transition-all duration-500" />
                     <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-1 sm:mb-2">
-                      {stat.value}
+                      <CountUp value={stat.value} />
                     </div>
                     <div className="text-xs sm:text-sm md:text-base text-neutral-600 dark:text-neutral-400 font-semibold">{stat.label}</div>
                   </motion.div>
@@ -478,10 +543,11 @@ export default function AboutPage() {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="max-w-5xl mx-auto text-center"
         >
-          <div className="p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800">
+          <div className="p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl sm:rounded-2xl md:rounded-3xl glass-surface">
             <Heart className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 mx-auto text-neutral-700 dark:text-neutral-300 mb-4 sm:mb-6 md:mb-8" />
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black mb-4 sm:mb-6 text-neutral-900 dark:text-white">
               Join Our Success Story
@@ -492,18 +558,18 @@ export default function AboutPage() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-block group relative bg-gradient-to-b from-black/10 to-white/10 dark:from-white/10 dark:to-black/10 p-px rounded-xl sm:rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="cta-shimmer inline-block group relative bg-gradient-to-b from-black/10 to-white/10 dark:from-white/10 dark:to-black/10 p-px rounded-xl sm:rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <Button
                 variant="ghost"
                 className="rounded-[0.9rem] sm:rounded-[1.15rem] px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg font-semibold backdrop-blur-md bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 text-black dark:text-white transition-all duration-300 group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10 hover:shadow-md dark:hover:shadow-neutral-800/50"
                 asChild
               >
-                <Link href="/contact">
+                <Link href="/contact" className="focus-ring rounded-[0.9rem] sm:rounded-[1.15rem]">
                   <span className="opacity-90 group-hover:opacity-100 transition-opacity">
                     Start Your Project
                   </span>
-                  <span className="ml-2 sm:ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                  <span className="ml-2 sm:ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
                     →
                   </span>
                 </Link>

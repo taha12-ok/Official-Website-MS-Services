@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Bot, Minimize2 } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, Minimize2, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ChatMessage {
@@ -18,7 +18,7 @@ export default function AIChatbot() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      text: "Hello! I'm your M.S Services AI assistant. I know everything about our company - from our founding in 2005 to our 12 comprehensive service offerings. What would you like to know about our construction, IT solutions, janitorial services, or any other service?",
+      text: "Hello! 👋 I'm the M.S Services Enterprise AI Assistant. Ask me about our flagship AI Automation solutions — AI chatbots, quote generation, CRM, WhatsApp, email, and workflow automation — or any of our construction, IT, solar, and other services. How can I help your business today?",
       isUser: false,
       timestamp: new Date()
     }
@@ -33,7 +33,34 @@ export default function AIChatbot() {
   // Enhanced AI response function with better matching
   const getAIResponse = (userMessage: string): string => {
     const msg = userMessage.toLowerCase().trim();
-    
+
+    // AI Automation — flagship service (precise matching to avoid catching
+    // substrings like "maintenance", "training", "repair", "email").
+    if (/\bai\b/.test(msg) || msg.includes('automation') || msg.includes('automate') || msg.includes('chatbot') || msg.includes('voice agent') || msg.includes('ai agent') || msg.includes('workflow') || msg.includes('crm')) {
+      return `🤖 **AI Automation** - Intelligent Automation for Modern Enterprises!
+
+**Our AI Capabilities:**
+✓ AI Customer Support & Chatbots
+✓ AI Voice Agents
+✓ AI Lead Qualification & Appointment Booking
+✓ AI CRM, Sales & WhatsApp Automation
+✓ AI Email & Workflow Automation
+✓ AI Business Process Automation
+✓ AI Knowledge Base & Document Processing
+✓ AI Analytics & Integrations
+
+**Business Impact:**
+• 24/7 Automated Operations
+• 80% Faster Responses
+• 15+ AI Capabilities
+• Scale without adding headcount
+• Seamless integration with your existing tools
+
+We design, build, and integrate AI agents and automated workflows — delivered with the reliability M.S Services has provided since 2005.
+
+Would you like to book a free AI Automation consultation? Just tap "Book AI Consultation" or ask me anything about it!`;
+    }
+
     // Exact service matching first
     if (msg.includes('janitor') || msg.includes('clean') || msg.includes('cleaning') || msg.includes('hygiene') || msg.includes('sanitization') || msg.includes('janitorial')) {
       return `🧹 **Janitorial Services** - Maintaining Excellence in Every Space!
@@ -163,10 +190,12 @@ From a small team to 50+ professionals serving clients across Pakistan!`;
     }
 
     if (msg.includes('service') || msg.includes('what do you offer') || msg.includes('offerings')) {
-      return `🔧 **Our 12 Comprehensive Services:**
+      return `🔧 **Our Services:**
+
+⭐ **AI Automation** (New Flagship) — AI agents, chatbots, voice agents & business automation
 
 1. 🏗️ Construction Services
-2. 💻 IT Equipment & Educational Solutions  
+2. 💻 IT Equipment & Educational Solutions
 3. 🧹 Janitorial Services
 4. 🚗 Transportation Services
 5. 📦 General Items & Supplies
@@ -183,6 +212,7 @@ From a small team to 50+ professionals serving clients across Pakistan!`;
 • 50+ Professional Team
 • 100% Client Satisfaction
 • ISO-aligned Quality Processes
+• Now powered by Enterprise AI Automation
 
 Which service would you like detailed information about?`;
     }
@@ -237,12 +267,13 @@ Could you specify which service you're interested in, or ask about:
 I'm here to provide detailed information!`;
   };
 
-  const handleSubmit = () => {
-    if (!message.trim()) return;
+  const handleSubmit = (overrideText?: string) => {
+    const text = (overrideText ?? message).trim();
+    if (!text) return;
 
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
-      text: message,
+      text,
       isUser: true,
       timestamp: new Date()
     };
@@ -253,7 +284,7 @@ I'm here to provide detailed information!`;
 
     // Simulate AI thinking time
     setTimeout(() => {
-      const aiResponse = getAIResponse(message);
+      const aiResponse = getAIResponse(text);
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         text: aiResponse,
@@ -271,6 +302,20 @@ I'm here to provide detailed information!`;
       handleSubmit();
     }
   };
+
+  // Suggested prompts shown as quick-start chips (enterprise UX).
+  const suggestedPrompts = [
+    'AI Chatbot',
+    'AI Quote Generator',
+    'CRM Automation',
+    'WhatsApp Automation',
+    'Email Automation',
+    'Workflow Automation',
+    'Our services',
+    'Get a quote',
+  ];
+  // Show chips only at the start of a conversation (before the user has sent anything).
+  const showSuggestions = messages.filter((m) => m.isUser).length === 0;
 
   return (
     <>
@@ -290,20 +335,22 @@ I'm here to provide detailed information!`;
                     <Bot size={16} className="sm:w-5 sm:h-5 text-white dark:text-neutral-900" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white dark:text-neutral-900 text-xs sm:text-sm">M.S Services AI</h3>
-                    <p className="text-xs text-white/90 dark:text-neutral-700">Online • Ready to help</p>
+                    <h3 className="font-bold text-white dark:text-neutral-900 text-xs sm:text-sm">M.S Enterprise AI Assistant</h3>
+                    <p className="text-xs text-white/90 dark:text-neutral-700">Online • AI Automation & Services</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 sm:gap-2">
                   <button
                     onClick={() => setIsMinimized(!isMinimized)}
-                    className="p-1 sm:p-2 hover:bg-white/20 dark:hover:bg-neutral-900/20 rounded-lg transition-all text-white dark:text-neutral-900"
+                    aria-label={isMinimized ? 'Expand chat' : 'Minimize chat'}
+                    className="p-1 sm:p-2 hover:bg-white/20 dark:hover:bg-neutral-900/20 rounded-lg transition-all text-white dark:text-neutral-900 focus-ring"
                   >
                     <Minimize2 size={14} className="sm:w-4 sm:h-4" />
                   </button>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="p-1 sm:p-2 hover:bg-white/20 dark:hover:bg-neutral-900/20 rounded-lg transition-all text-white dark:text-neutral-900"
+                    aria-label="Close chat"
+                    className="p-1 sm:p-2 hover:bg-white/20 dark:hover:bg-neutral-900/20 rounded-lg transition-all text-white dark:text-neutral-900 focus-ring"
                   >
                     <X size={16} className="sm:w-5 sm:h-5" />
                   </button>
@@ -347,7 +394,42 @@ I'm here to provide detailed information!`;
                         </div>
                       </div>
                     )}
+                    {showSuggestions && (
+                      <div className="pt-1">
+                        <p className="text-[10px] sm:text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-2">Suggested</p>
+                        <div className="flex flex-wrap gap-2">
+                          {suggestedPrompts.map((prompt) => (
+                            <button
+                              key={prompt}
+                              onClick={() => handleSubmit(prompt)}
+                              className="px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:border-emerald-500/50 hover:text-neutral-900 dark:hover:text-white transition-colors focus-ring"
+                            >
+                              {prompt}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     <div ref={chatEndRef} />
+                  </div>
+
+                  {/* Quick Actions */}
+                  <div className="px-3 sm:px-4 pt-3 flex flex-wrap gap-2">
+                    <a
+                      href="https://wa.me/923118305310?text=I%27d%20like%20to%20book%20an%20AI%20Automation%20consultation"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 hover:border-emerald-500/50 transition-colors focus-ring"
+                    >
+                      <Sparkles className="w-3 h-3" />
+                      Book AI Consultation
+                    </a>
+                    <a
+                      href="/contact"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:opacity-90 transition-opacity focus-ring"
+                    >
+                      Get a Quote
+                    </a>
                   </div>
 
                   {/* Input */}
@@ -358,14 +440,16 @@ I'm here to provide detailed information!`;
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyPress={handleKeyPress}
-                        placeholder="Ask about janitorial, construction, IT..."
+                        placeholder="Ask about AI chatbots, CRM, WhatsApp automation..."
+                        aria-label="Ask about our services"
                         className="flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:border-neutral-900 dark:focus:border-white focus:outline-none text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 text-xs sm:text-sm"
                       />
                       <motion.button
-                        onClick={handleSubmit}
+                        onClick={() => handleSubmit()}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 dark:from-white dark:via-neutral-100 dark:to-white rounded-full flex items-center justify-center shadow-lg flex-shrink-0"
+                        aria-label="Send message"
+                        className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 dark:from-white dark:via-neutral-100 dark:to-white rounded-full flex items-center justify-center shadow-lg flex-shrink-0 focus-ring"
                       >
                         <Send size={16} className="sm:w-5 sm:h-5 text-white dark:text-neutral-900" />
                       </motion.button>
@@ -384,7 +468,8 @@ I'm here to provide detailed information!`;
           onClick={() => setIsOpen(true)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-4 right-4 z-40 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 dark:from-white dark:via-neutral-100 dark:to-white rounded-full shadow-2xl flex items-center justify-center hover:shadow-neutral-500/50 dark:hover:shadow-white/50 transition-all duration-300"
+          aria-label="Open chat assistant"
+          className="fixed bottom-4 right-4 z-40 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 dark:from-white dark:via-neutral-100 dark:to-white rounded-full shadow-2xl flex items-center justify-center hover:shadow-neutral-500/50 dark:hover:shadow-white/50 transition-all duration-300 focus-ring"
         >
           <MessageCircle size={20} className="sm:w-6 sm:h-6 text-white dark:text-neutral-900" />
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-white dark:border-neutral-900" />

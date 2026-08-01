@@ -1,9 +1,41 @@
 "use client"
 import React, { useState } from 'react';
-import { Building2, Laptop, Droplets, Car, Package, Sun, CheckCircle, ArrowRight, Zap, Shield, Award, TrendingUp, LifeBuoy, Plane, Wrench, Cpu } from 'lucide-react';
+import { Building2, Laptop, Droplets, Car, Package, Sun, CheckCircle, ArrowRight, Zap, Shield, Award, TrendingUp, LifeBuoy, Plane, Wrench, Cpu, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { FloatingPaths } from '@/components/ui/FloatingPaths';
+import { staggerContainer, fadeInUp } from '@/lib/motion';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { CountUp } from '@/components/ui/CountUp';
 
 const services = [
+  {
+    id: 'ai-automation',
+    icon: Bot,
+    title: "AI Automation",
+    tagline: "Intelligent Automation for Modern Enterprises",
+    desc: "Enterprise AI automation solutions — from AI customer support, voice and chat agents to CRM, sales, WhatsApp, email, and full business process automation that scales your operations without adding headcount.",
+    image: "/it1.png",
+    features: [
+      "AI Customer Support & Chatbots",
+      "AI Voice Agents",
+      "AI Lead Qualification & Appointment Booking",
+      "AI CRM, Sales & WhatsApp Automation",
+      "AI Workflow & Business Process Automation",
+      "AI Document Processing, Analytics & Integrations"
+    ],
+    stats: [
+      { value: "24/7", label: "Automated Operations" },
+      { value: "80%", label: "Faster Responses" },
+      { value: "15+", label: "AI Capabilities" }
+    ],
+    benefits: [
+      "Reduce repetitive manual workload",
+      "Instant, 24/7 customer responses",
+      "Scale operations without adding headcount",
+      "Seamless integration with existing tools"
+    ]
+  },
   {
     id: 'life-raft',
     icon: LifeBuoy,
@@ -330,75 +362,12 @@ const services = [
   }
 ];
 
-function FloatingPaths({ position }: { position: number }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
-    id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    width: 0.5 + i * 0.03,
-  }));
-
-  return (
-    <div className="absolute inset-0 pointer-events-none">
-      <svg
-        className="w-full h-full text-slate-950 dark:text-white"
-        viewBox="0 0 696 316"
-        fill="none"
-      >
-        <title>Background Paths</title>
-        {paths.map((path) => (
-          <motion.path
-            key={path.id}
-            d={path.d}
-            stroke="currentColor"
-            strokeWidth={path.width}
-            strokeOpacity={0.1 + path.id * 0.03}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
-      </svg>
-    </div>
-  );
-}
 
 export default function ServicesPage() {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
 
- const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8
-    }
-  }
-};
+  const containerVariants = staggerContainer(0.2);
+  const itemVariants = fadeInUp(50, 0.8);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-neutral-950">
@@ -410,11 +379,12 @@ const itemVariants = {
 
       {/* Hero Section */}
       <section className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center px-4 pt-24 sm:pt-32 pb-12 sm:pb-20">
+        <div aria-hidden="true" className="hero-lighting" />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="max-w-6xl mx-auto text-center"
+          className="relative z-10 max-w-6xl mx-auto text-center"
         >
           {/* Badge */}
           <motion.div
@@ -507,7 +477,7 @@ const itemVariants = {
                         {service.features.map((feature, i) => (
                           <motion.div 
                             key={i}
-                            className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-white/10 dark:hover:bg-black/10 transition-all duration-300"
+                            className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-white/10 dark:hover:bg-black/10 transition-all duration-300"
                             whileHover={{ x: 10 }}
                             transition={{ delay: i * 0.1 }}
                           >
@@ -520,22 +490,23 @@ const itemVariants = {
                       {/* Stats */}
                       <div className="grid grid-cols-3 gap-2 sm:gap-4">
                         {service.stats.map((stat, i) => (
-                          <motion.div 
+                          <motion.div
                             key={i}
-                            className="p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 text-center hover:scale-105 transition-all duration-300"
                             whileHover={{ scale: 1.05, y: -5 }}
                           >
+                            <GlassCard className="p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl text-center">
                             <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-1">
-                              {stat.value}
+                              <CountUp value={stat.value} />
                             </div>
                             <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">{stat.label}</div>
+                            </GlassCard>
                           </motion.div>
                         ))}
                       </div>
 
                       {/* Benefits */}
                       <motion.div 
-                        className="p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800"
+                        className="p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl glass-surface"
                         whileHover={{ scale: 1.02 }}
                       >
                         <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-3 sm:mb-4 flex items-center gap-2 text-neutral-900 dark:text-white">
@@ -564,12 +535,12 @@ const itemVariants = {
                         >
                           <a
                             href={`/services/${service.id}`}
-                            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base"
+                            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base focus-ring"
                           >
                             <span className="relative z-10">
                               View Details
                             </span>
-                            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform" />
+                            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
                             <motion.div
                               className="absolute inset-0 bg-gradient-to-r from-neutral-700 to-neutral-900 dark:from-neutral-200 dark:to-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                               initial={false}
@@ -582,7 +553,7 @@ const itemVariants = {
                           whileTap={{ scale: 0.95 }}
                         >
                           <button
-                            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white border-2 border-neutral-900 dark:border-white font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base"
+                            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white border-2 border-neutral-900 dark:border-white font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base focus-ring"
                           >
                             <span className="relative z-10">
                               Get a Quote
@@ -602,10 +573,13 @@ const itemVariants = {
                       >
                         {/* Main Image Card */}
                         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 aspect-[4/3] sm:min-h-[400px]">
-                          <img 
-                            src={service.image} 
+                          <Image
+                            src={service.image}
                             alt={service.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            fill
+                            loading="lazy"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-cover group-hover:scale-110 transition-transform duration-700"
                           />
                           
                           {/* Gradient Overlay */}
@@ -645,7 +619,11 @@ const itemVariants = {
                           }}
                           whileHover={{ scale: 1.1 }}
                         >
-                          {hoveredService === service.id ? '🔥 Hot Service' : '⭐ Popular'}
+                          {service.id === 'ai-automation'
+                            ? '✨ New · Flagship'
+                            : hoveredService === service.id
+                              ? '🔥 Hot Service'
+                              : '⭐ Popular'}
                         </motion.div>
                       </motion.div>
                     </div>
@@ -666,7 +644,7 @@ const itemVariants = {
           viewport={{ once: true }}
           className="max-w-5xl mx-auto text-center"
         >
-          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800">
+          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl glass-surface">
             <motion.div
               animate={{ 
                 rotate: [0, 10, 0],
@@ -691,12 +669,12 @@ const itemVariants = {
               whileTap={{ scale: 0.95 }}
             >
               <button
-                className="group relative px-8 sm:px-10 py-4 sm:py-5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base"
+                className="group relative px-8 sm:px-10 py-4 sm:py-5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base focus-ring"
               >
                 <span className="relative z-10">
                   Schedule Consultation
                 </span>
-                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" />
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 arrow-slide" />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-neutral-700 to-neutral-900 dark:from-neutral-200 dark:to-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   initial={false}

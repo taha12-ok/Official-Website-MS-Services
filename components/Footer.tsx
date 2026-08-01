@@ -1,7 +1,10 @@
 "use client"
 import React from 'react';
-import { Phone, Mail, MapPin, Building2, MessageCircle, Instagram, Heart, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageCircle, Heart, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { staggerContainer, fadeInUp } from '@/lib/motion';
+import { navServices } from '@/lib/data/services';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,41 +17,10 @@ export default function Footer() {
     { name: 'Contact', href: '/contact' }
   ];
 
-  const services = [
-    { name: 'Life Raft & Safety Equipment', href: '/services/life-raft' },
-    { name: 'Aviation Parts & Equipment', href: '/services/aviation-parts' },
-    { name: 'Marine Electronics & Mechanical', href: '/services/marine-electronics-mechanical' },
-    { name: 'Mechanical Services', href: '/services/mechanical-services' },
-    { name: 'Solar System Installation', href: '/services/solar' },
-    { name: 'Electrical & Electronics', href: '/services/electrical-electronics' },
-    { name: 'General Items & Supplies', href: '/services/supplies' },
-    { name: 'Generator Systems & Parts', href: '/services/generator-parts' },
-    { name: 'IT Equipment & Educational Solutions', href: '/services/it-solutions' },
-    { name: 'Construction Services', href: '/services/construction' },
-    { name: 'Transportation Services', href: '/services/transportation' },
-    { name: 'Janitorial Services', href: '/services/janitorial' }
-  ];
+  const services = navServices;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
+  const containerVariants = staggerContainer(0.1);
+  const itemVariants = fadeInUp(20, 0.5);
 
   return (
     <footer className="relative bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 dark:from-white dark:via-neutral-50 dark:to-white border-t border-white/10 dark:border-neutral-200/50 overflow-hidden">
@@ -101,9 +73,12 @@ export default function Footer() {
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
               >
-                <img 
-                  src="/mslogo.png" 
-                  alt="MS Logo" 
+                <Image
+                  src="/mslogo.png"
+                  alt="M.S Services logo"
+                  width={48}
+                  height={48}
+                  loading="lazy"
                   className="w-full h-full object-contain drop-shadow-2xl"
                 />
               </motion.div>
@@ -116,6 +91,7 @@ export default function Footer() {
               className="text-sm sm:text-base text-neutral-400 dark:text-neutral-600 leading-relaxed"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
               Building Excellence, Delivering Solutions. Your trusted partner for integrated infrastructure solutions.
@@ -151,11 +127,13 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title={social.label}
-                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 dark:bg-neutral-100/50 backdrop-blur-xl border border-white/10 dark:border-neutral-200/50 flex items-center justify-center ${social.color} transition-all duration-300`}
+                    aria-label={social.label}
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 dark:bg-neutral-100/50 backdrop-blur-xl border border-white/10 dark:border-neutral-200/50 flex items-center justify-center ${social.color} transition-all duration-300 focus-ring`}
                     whileHover={{ scale: 1.2, rotate: 360 }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
                     transition={{ delay: 0.3 + idx * 0.1 }}
                   >
                     <Icon size={16} className="sm:w-[18px] sm:h-[18px] text-white dark:text-neutral-700" />
@@ -171,6 +149,7 @@ export default function Footer() {
               className="text-base sm:text-lg font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-neutral-200 to-white dark:from-neutral-900 dark:via-neutral-700 dark:to-neutral-900 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
             >
               Quick Links
             </motion.h3>
@@ -180,11 +159,12 @@ export default function Footer() {
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
                   <motion.a
                     href={link.href}
-                    className="group flex items-center gap-2 text-sm sm:text-base text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-all duration-300"
+                    className="group flex items-center gap-2 text-sm sm:text-base text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-all duration-300 focus-ring rounded"
                     whileHover={{ x: 10 }}
                   >
                     <ArrowRight size={14} className="sm:w-4 sm:h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
@@ -203,6 +183,7 @@ export default function Footer() {
               className="text-base sm:text-lg font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-neutral-200 to-white dark:from-neutral-900 dark:via-neutral-700 dark:to-neutral-900 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
             >
               Our Services
             </motion.h3>
@@ -212,12 +193,12 @@ export default function Footer() {
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
                   viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
                 >
                   <motion.a
                     href={service.href}
-                    className="group flex items-center gap-2 text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-all duration-300"
+                    className="group flex items-center gap-2 text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-all duration-300 focus-ring rounded"
                     whileHover={{ x: 5 }}
                   >
                     <motion.span 
@@ -239,6 +220,7 @@ export default function Footer() {
               className="text-base sm:text-lg font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-neutral-200 to-white dark:from-neutral-900 dark:via-neutral-700 dark:to-neutral-900 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
             >
               Get in Touch
             </motion.h3>
@@ -271,6 +253,7 @@ export default function Footer() {
                     className="group"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}
                     whileHover={{ scale: 1.02 }}
                   >
@@ -286,9 +269,9 @@ export default function Footer() {
                       <div>
                         <p className="text-[10px] sm:text-xs text-neutral-500 dark:text-neutral-500 mb-1">{contact.label}</p>
                         {contact.href ? (
-                          <a 
-                            href={contact.href} 
-                            className={`text-xs sm:text-sm text-neutral-200 dark:text-neutral-700 hover:text-white dark:hover:text-neutral-900 transition-colors ${contact.breakAll ? 'break-all' : ''}`}
+                          <a
+                            href={contact.href}
+                            className={`text-xs sm:text-sm text-neutral-200 dark:text-neutral-700 hover:text-white dark:hover:text-neutral-900 transition-colors focus-ring rounded ${contact.breakAll ? 'break-all' : ''}`}
                           >
                             {contact.content}
                           </a>
@@ -311,6 +294,7 @@ export default function Footer() {
           className="pt-6 sm:pt-8 border-t border-white/10 dark:border-neutral-200/50"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
@@ -318,6 +302,7 @@ export default function Footer() {
               className="text-neutral-400 dark:text-neutral-600 text-xs sm:text-sm flex items-center gap-2 text-center md:text-left"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
             >
               © {currentYear} M.S Services & Trading Co. Made with 
               <motion.span
@@ -339,18 +324,19 @@ export default function Footer() {
               className="flex gap-4 sm:gap-6 text-xs sm:text-sm"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <motion.a 
-                href="/privacy" 
-                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-colors"
+              <motion.a
+                href="/privacy"
+                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-colors focus-ring rounded"
                 whileHover={{ scale: 1.1 }}
               >
                 Privacy Policy
               </motion.a>
-              <motion.a 
-                href="/terms" 
-                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-colors"
+              <motion.a
+                href="/terms"
+                className="text-neutral-400 dark:text-neutral-600 hover:text-white dark:hover:text-neutral-900 transition-colors focus-ring rounded"
                 whileHover={{ scale: 1.1 }}
               >
                 Terms of Service

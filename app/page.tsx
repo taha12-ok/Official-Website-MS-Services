@@ -1,12 +1,22 @@
 "use client"
 import React, { useState, useRef } from 'react';
-import { Building2, Laptop, Droplets, Car, Package, Sun, CheckCircle, Award, Shield, ArrowRight, Users, Sparkles, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Building2, Laptop, Droplets, Car, Package, Sun, CheckCircle, Award, Shield, ArrowRight, Users, Sparkles, Play, Pause, Volume2, VolumeX, Bot } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { FloatingPaths } from '@/components/ui/FloatingPaths';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { CountUp } from '@/components/ui/CountUp';
 
 // Define services and stats arrays used in this file (keeps names and structure expected by the UI)
 const services = [
+  {
+    icon: Bot,
+    title: "AI Automation",
+    desc: "Enterprise AI agents and automation — customer support, voice & chat agents, CRM, WhatsApp, and workflow automation that run your operations 24/7.",
+    href: "/services/ai-automation",
+    featured: true
+  },
   {
     icon: Building2,
     title: "Construction & Engineering",
@@ -61,54 +71,6 @@ const stats = [
     label: "Support & Maintenance"
   }
 ];
-
-// CORRECTED FloatingPaths component with animated lines
-function FloatingPaths({ position }: { position: number }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
-    id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    color: `rgba(15,23,42,${0.1 + i * 0.03})`,
-    width: 0.5 + i * 0.03,
-  }));
-
-  return (
-    <div className="absolute inset-0 pointer-events-none">
-      <svg
-        className="w-full h-full text-slate-950 dark:text-white"
-        viewBox="0 0 696 316"
-        fill="none"
-      >
-        <title>Background Paths</title>
-        {paths.map((path) => (
-          <motion.path
-            key={path.id}
-            d={path.d}
-            stroke="currentColor"
-            strokeWidth={path.width}
-            strokeOpacity={0.1 + path.id * 0.03}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
-            }}
-          />
-        ))}
-      </svg>
-    </div>
-  );
-}
 
 export default function HomePage() {
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(true);
@@ -165,11 +127,12 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh] sm:min-h-[90vh] flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-20">
+        <div aria-hidden="true" className="hero-lighting" />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
-          className="max-w-6xl mx-auto text-center"
+          className="relative z-10 max-w-6xl mx-auto text-center"
         >
           {/* Title with letter-by-letter animation */}
           <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 tracking-tighter px-2">
@@ -210,18 +173,18 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="inline-block group relative bg-gradient-to-b from-black/10 to-white/10 dark:from-white/10 dark:to-black/10 p-px rounded-xl sm:rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="cta-shimmer inline-block group relative bg-gradient-to-b from-black/10 to-white/10 dark:from-white/10 dark:to-black/10 p-px rounded-xl sm:rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             <Button
               variant="ghost"
               className="rounded-[1rem] sm:rounded-[1.15rem] px-6 sm:px-8 py-4 sm:py-6 text-sm sm:text-base md:text-lg font-semibold backdrop-blur-md bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 text-black dark:text-white transition-all duration-300 group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10 hover:shadow-md dark:hover:shadow-neutral-800/50"
               asChild
             >
-              <Link href="/services">
+              <Link href="/services" className="focus-ring rounded-[1rem] sm:rounded-[1.15rem]">
                 <span className="opacity-90 group-hover:opacity-100 transition-opacity">
                   Explore Our Services
                 </span>
-                <span className="ml-2 sm:ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 sm:group-hover:translate-x-1.5 transition-all duration-300">
+                <span className="ml-2 sm:ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 sm:group-hover:translate-x-1.5 transition-all duration-300 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
                   →
                 </span>
               </Link>
@@ -236,6 +199,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 1 }}
             className="text-center mb-12 sm:mb-16 md:mb-20"
           >
@@ -251,6 +215,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 1.5, delay: 0.3 }}
             className="flex justify-center items-center"
           >
@@ -276,8 +241,9 @@ export default function HomePage() {
                       muted={isMuted}
                       loop
                       playsInline
+                      preload="metadata"
+                      aria-label="M.S Services showcase video"
                       className="w-full h-full object-cover"
-                      poster="/video-poster.jpg"
                     >
                       <source src="/video.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
@@ -291,26 +257,28 @@ export default function HomePage() {
                       {/* Play/Pause Control */}
                       <button
                         onClick={handleVideoControl}
-                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
+                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group focus-ring motion-reduce:transition-none motion-reduce:hover:scale-100"
                         title={isVideoPlaying ? "Pause" : "Play"}
+                        aria-label={isVideoPlaying ? "Pause video" : "Play video"}
                       >
                         {isVideoPlaying ? (
-                          <Pause className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform" />
+                          <Pause className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                         ) : (
-                          <Play className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform" />
+                          <Play className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                         )}
                       </button>
 
                       {/* Volume Control */}
                       <button
                         onClick={handleVolumeControl}
-                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
+                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group focus-ring motion-reduce:transition-none motion-reduce:hover:scale-100"
                         title={isMuted ? "Unmute" : "Mute"}
+                        aria-label={isMuted ? "Unmute video" : "Mute video"}
                       >
                         {isMuted ? (
-                          <VolumeX className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform" />
+                          <VolumeX className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                         ) : (
-                          <Volume2 className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform" />
+                          <Volume2 className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                         )}
                       </button>
                     </div>
@@ -343,6 +311,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-center mt-12 sm:mt-16 md:mt-20 max-w-2xl mx-auto px-4"
           >
@@ -356,9 +325,9 @@ export default function HomePage() {
               className="rounded-full px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base bg-white/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-700 hover:bg-white/10 dark:hover:bg-black/20 text-neutral-900 dark:text-white hover:scale-105 transition-all duration-300"
               asChild
             >
-              <Link href="/projects">
+              <Link href="/projects" className="group inline-flex items-center">
                 View Our Projects
-                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 arrow-slide" />
               </Link>
             </Button>
           </motion.div>
@@ -370,6 +339,7 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="max-w-7xl mx-auto"
         >
@@ -381,14 +351,15 @@ export default function HomePage() {
                   key={idx}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.1 }}
                   className="text-center group p-4 sm:p-6"
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 mx-auto rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br from-neutral-600 to-neutral-800 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 transition-all duration-500 shadow-lg">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 mx-auto rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br from-neutral-600 to-neutral-800 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 transition-all duration-500 shadow-lg group-hover:shadow-xl">
                     <Icon size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
                   </div>
                   <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-2 sm:mb-3">
-                    {stat.value}
+                    <CountUp value={stat.value} />
                   </div>
                   <div className="text-xs sm:text-sm md:text-base lg:text-lg text-neutral-600 dark:text-neutral-400 font-semibold">
                     {stat.label}
@@ -405,6 +376,7 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="max-w-7xl mx-auto"
         >
@@ -412,6 +384,7 @@ export default function HomePage() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent"
             >
@@ -420,6 +393,7 @@ export default function HomePage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto px-2 sm:px-0"
             >
@@ -435,9 +409,16 @@ export default function HomePage() {
                   key={idx}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.1 }}
-                  className="group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105"
                 >
+                  <GlassCard className="p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl md:rounded-3xl h-full">
+                  {service.featured && (
+                    <span className="inline-flex items-center gap-1 mb-3 sm:mb-4 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                      <Sparkles className="w-3 h-3" />
+                      New · Flagship
+                    </span>
+                  )}
                   <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br from-neutral-600 to-neutral-800 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-105 sm:group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <Icon size={20} className="sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
                   </div>
@@ -448,12 +429,13 @@ export default function HomePage() {
                     {service.desc}
                   </p>
                   <Link
-                    href="/services"
+                    href={service.href ?? "/services"}
                     className="inline-flex items-center text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors group/link"
                   >
                     Learn More
-                    <ArrowRight className="ml-1 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4 group-hover/link:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-1 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4 group-hover/link:translate-x-1 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover/link:translate-x-0" />
                   </Link>
+                  </GlassCard>
                 </motion.div>
               );
             })}
@@ -466,6 +448,7 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="max-w-4xl mx-auto text-center"
         >
@@ -478,18 +461,18 @@ export default function HomePage() {
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-block group relative bg-gradient-to-b from-black/10 to-white/10 dark:from-white/10 dark:to-black/10 p-px rounded-xl sm:rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="cta-shimmer inline-block group relative bg-gradient-to-b from-black/10 to-white/10 dark:from-white/10 dark:to-black/10 p-px rounded-xl sm:rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             <Button
               variant="ghost"
               className="rounded-[1rem] sm:rounded-[1.15rem] px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg font-semibold backdrop-blur-md bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 text-black dark:text-white transition-all duration-300 group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10 hover:shadow-md dark:hover:shadow-neutral-800/50"
               asChild
             >
-              <Link href="/contact">
+              <Link href="/contact" className="focus-ring rounded-[1rem] sm:rounded-[1.15rem]">
                 <span className="opacity-90 group-hover:opacity-100 transition-opacity">
                   Start Your Project
                 </span>
-                <span className="ml-2 sm:ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 sm:group-hover:translate-x-1.5 transition-all duration-300">
+                <span className="ml-2 sm:ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 sm:group-hover:translate-x-1.5 transition-all duration-300 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">
                   →
                 </span>
               </Link>

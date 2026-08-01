@@ -1,7 +1,9 @@
 "use client"
 import React, { useState } from 'react';
-import { Anchor, GraduationCap, Droplets, School, Building2, Shield, CheckCircle, Award, Calendar, MapPin, TrendingUp, Star, ArrowRight, Zap } from 'lucide-react';
+import { Anchor, GraduationCap, Droplets, School, Building2, Shield, CheckCircle, Award, Calendar, MapPin, TrendingUp, Star, ArrowRight, Zap, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { CountUp } from '@/components/ui/CountUp';
 
 const projects = [
   {
@@ -146,6 +148,30 @@ const projects = [
       budget: "Cost Effective",
       team: "30+ Workers",
       satisfaction: "100%"
+    }
+  },
+  {
+    id: 7,
+    title: "AI Automation Suite (Demo Showcase)",
+    client: "Demo / Placeholder — Not a real client engagement",
+    category: "AI Automation",
+    year: "2025",
+    location: "Cloud / Remote Deployment",
+    description: "Illustrative showcase of our AI Automation capabilities: AI chat & voice agents, lead qualification, WhatsApp and CRM automation, and workflow automation. Demo content for illustration only.",
+    icon: Bot,
+    image: "/it2.png",
+    color: "from-emerald-500 to-cyan-500",
+    achievements: [
+      "AI customer support agents",
+      "WhatsApp & CRM automation",
+      "Automated lead qualification",
+      "24/7 intelligent workflows"
+    ],
+    stats: {
+      duration: "Rapid Deployment",
+      budget: "Scalable",
+      team: "AI Solutions Team",
+      satisfaction: "Demo"
     }
   }
 ];
@@ -343,7 +369,7 @@ export default function ProjectsPage() {
                         {project.achievements.map((achievement, i) => (
                           <motion.div 
                             key={i}
-                            className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-white/10 dark:hover:bg-black/10 transition-all duration-300"
+                            className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl glass-surface hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-white/10 dark:hover:bg-black/10 transition-all duration-300"
                             whileHover={{ x: 10 }}
                             transition={{ delay: i * 0.1 }}
                           >
@@ -358,7 +384,7 @@ export default function ProjectsPage() {
                         {Object.entries(project.stats).map(([key, value], i) => (
                           <motion.div 
                             key={i}
-                            className="p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 text-center hover:scale-105 transition-all duration-300"
+                            className="p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl glass-surface text-center hover:scale-105 transition-all duration-300"
                             whileHover={{ scale: 1.05, y: -5 }}
                           >
                             <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-1">
@@ -371,7 +397,7 @@ export default function ProjectsPage() {
 
                       {/* Rating */}
                       <motion.div 
-                        className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800 flex items-center justify-between"
+                        className="p-4 sm:p-6 rounded-xl sm:rounded-2xl glass-surface flex items-center justify-between"
                         whileHover={{ scale: 1.02 }}
                       >
                         <div className="flex gap-0.5 sm:gap-1">
@@ -387,11 +413,11 @@ export default function ProjectsPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <button className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
+                        <button className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base focus-ring">
                           <span className="relative z-10">
                             Get Quote
                           </span>
-                          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform" />
+                          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-neutral-700 to-neutral-900 dark:from-neutral-200 dark:to-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             initial={false}
@@ -409,10 +435,13 @@ export default function ProjectsPage() {
                       >
                         {/* Main Image Card */}
                         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-500 aspect-[4/3] sm:min-h-[400px] lg:min-h-[500px]">
-                          <img 
-                            src={project.image} 
+                          <Image
+                            src={project.image}
                             alt={project.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            fill
+                            loading="lazy"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-cover group-hover:scale-110 transition-transform duration-700"
                           />
                           
                           {/* Gradient Overlay */}
@@ -482,7 +511,7 @@ export default function ProjectsPage() {
           viewport={{ once: true }}
           className="max-w-5xl mx-auto text-center"
         >
-          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800">
+          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl glass-surface">
             <motion.div
               animate={{ 
                 rotate: [0, 10, 0],
@@ -521,7 +550,7 @@ export default function ProjectsPage() {
                       <Icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
                     </div>
                     <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black bg-gradient-to-r from-neutral-900 to-neutral-700/80 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-1 sm:mb-2">
-                      {stat.value}
+                      <CountUp value={stat.value} />
                     </div>
                     <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-semibold px-2">{stat.label}</div>
                   </motion.div>
@@ -541,7 +570,7 @@ export default function ProjectsPage() {
           viewport={{ once: true }}
           className="max-w-5xl mx-auto text-center"
         >
-          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl bg-white/5 dark:bg-black/5 backdrop-blur-xl border border-neutral-300 dark:border-neutral-800">
+          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl glass-surface">
             <motion.div
               animate={{ 
                 rotate: [0, 10, 0],
@@ -565,11 +594,11 @@ export default function ProjectsPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <button className="group relative px-8 sm:px-10 py-4 sm:py-5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
+              <button className="group relative px-8 sm:px-10 py-4 sm:py-5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-bold rounded-full hover:shadow-xl transition-all duration-300 overflow-hidden inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base focus-ring">
                 <span className="relative z-10">
                   Start Your Project
                 </span>
-                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" />
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 arrow-slide" />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-neutral-700 to-neutral-900 dark:from-neutral-200 dark:to-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   initial={false}
