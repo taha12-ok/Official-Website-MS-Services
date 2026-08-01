@@ -65,7 +65,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
+<<<<<<< HEAD
         <JsonLd data={[organizationSchema(), localBusinessSchema(), websiteSchema()]} />
+=======
+>>>>>>> ff5e94e5c85a7e28d6d7aacd83e2cedadce9edc5
         <Navigation floating />
         {children}
         <Footer />
